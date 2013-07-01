@@ -8,6 +8,7 @@ class I15R
         /<%=[^:]*label(_tag)?[^,]+?(?<label-title>(['"].+?['"]|:[[:alnum:]_]+))[^,]+%>.*$/,
         /<%=[^:]*label(_tag)?.*?,\s*(?<label-title>(['"].+?['"]|:[[:alnum:]_]+))/,
         /<%=.*:label => (?<label-title>(['"].+?['"]|:[[:alnum:]_]+))/,
+        /<%=.*:hint => (?<label-title>(['"].+?['"]|:[[:alnum:]_]+))/,
         /<%=.*submit(_tag)?\s+(?<submit-text>(['"].+?['"]|:[[:alnum:]_]+))/,
         />(?<tag-content>[[:space:][:alnum:][:punct:]]+?)<\//,
         /<a\s+title=['"](?<link-title>.+?)['"]/,
