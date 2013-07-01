@@ -96,6 +96,13 @@ describe I15R::PatternMatcher do
                                .to(%(<a title="<%= I18n.t("users.new.site_root") %>" href="/"><img src="site_logo.png" /></a>)) }
     end
 
+    describe "Rails helper methods with multiple options" do
+      let(:pattern_matcher) { I15R::PatternMatcher.new("users.index", :erb) }
+
+      it { should internationalize(%(<%= f.input :login, :label => "API Username", :required => true %>))
+          .to(%(<%= f.input :login, :label => I18n.t("users.index.api_username"), :required => true %>)) }
+    end
+
     describe "Rails helper methods" do
       let(:pattern_matcher) { I15R::PatternMatcher.new("users.index", :erb) }
 
