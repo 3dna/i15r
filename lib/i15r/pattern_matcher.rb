@@ -48,11 +48,11 @@ class I15R
         if line !~ /[[:alpha:]]/
           new_line
         else
-          PATTERNS[@file_type].detect do |pattern|
+          PATTERNS[@file_type].each do |pattern|
             if m = pattern.match(line)
               m.names.each do |group_name|
                 if /\w/.match(m[group_name])
-                  new_line = @transformer.transform(m, m[group_name], line, translation_key(m[group_name]))
+                  new_line = @transformer.transform(m, m[group_name], new_line || line, translation_key(m[group_name]))
                 end
               end
             end
@@ -91,7 +91,6 @@ class I15R
     class ErbTransformer < Transformer
 
       def transform(match_data, match, line, translation_key)
-        return line if line.match /\bt\(/
         if match_data.to_s.index("<%")
           line.gsub(match, i18n_string(translation_key, match))
         else

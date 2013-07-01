@@ -63,11 +63,6 @@ describe I15R::PatternMatcher do
                                  .to('<h1><%= t("users.new.new_flight") %></h1>') }
       end
 
-      describe "when a line is already international" do
-        it { should internationalize(%(  <%= f.label I18n.t("users.new.name") %>)).to_the_same }
-        it { should internationalize(%(  <%= f.label t("users.new.name") %>)).to_the_same }
-      end
-
       describe "when a line contains Ruby variables only" do
         it { should internationalize(%( <%= hello_world %> )).to_the_same }
         it { should internationalize(%( <h1><%= hello_world %></h1> )).to_the_same }
@@ -101,6 +96,9 @@ describe I15R::PatternMatcher do
 
       it { should internationalize(%(<%= f.input :login, :label => "API Username", :required => true %>))
           .to(%(<%= f.input :login, :label => I18n.t("users.index.api_username"), :required => true %>)) }
+
+      it { should internationalize(%(<%= f.input :is_posting_public, :label => "test string1", :hint => "test string 2" %>))
+          .to(%(<%= f.input :is_posting_public, :label => I18n.t("users.index.test_string1"), :hint => I18n.t("users.index.test_string_2") %>)) }
     end
 
     describe "Rails helper methods" do
